@@ -224,10 +224,12 @@ class HTTPBasicAuth(HTTPAuth):
         except (ValueError, TypeError):
             return None
         try:
+            scheme = scheme.decode('utf-8')
             username = encoded_username.decode('utf-8')
             password = encoded_password.decode('utf-8')
         except UnicodeDecodeError:
             # try to decode again with latin-1, which should always work
+            scheme = scheme.decode('latin1')
             username = encoded_username.decode('latin1')
             password = encoded_password.decode('latin1')
 
